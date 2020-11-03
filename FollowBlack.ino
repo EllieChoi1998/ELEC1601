@@ -3,8 +3,8 @@
 #include <Servo.h> 
 
 // initialize servo motors
-Servo LeftServo;
-Servo RightServo;
+Servo ServoLeft;
+Servo ServoRight;
 
 // define constants
 const int RSensor = A0;  // analog input for right photoresistor
@@ -26,8 +26,8 @@ int rightReverse = 96;
 
 void setup() 
 { 
-  LeftServo.attach(13);  // attach left servo to pin 6 on arduino
-  RightServo.attach(12); // attach right servo to pin 9 on arduino
+  ServoLeft.attach(13);  // attach left servo to pin 13 on arduino
+  ServoRight.attach(12); // attach right servo to pin 12 on arduino
   Serial.begin(9600);   // initialize serial
 } 
  
