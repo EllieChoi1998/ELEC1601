@@ -9,7 +9,7 @@ Servo ServoRight;
 // define constants
 const int RSensor = A0;  // analog input for right photoresistor
 const int LSensor = A1;  // analog input for left photoresistor
-const int light = 450;   // adjust this value based on ambient light in room
+const int light = 500;   // adjust this value based on ambient light in room
                          // pure white would be a low value, but can read higher in a darker room
 // initialize value readings for sensors
 int LSensorVal;
@@ -23,6 +23,7 @@ int leftTurn = 96;
 int rightTurn = 86;
 int leftReverse = 86;
 int rightReverse = 96;
+int stopGo = 0;
 
 void setup() 
 { 
@@ -38,20 +39,22 @@ void loop()
  RSensorVal = analogRead(RSensor);
  
   if (RSensorVal > light && LSensorVal > light) {  // sees no line on either side, goes straight until a line is seen
-    LeftServo.write(leftGo);    // left wheel turns
-    RightServo.write(rightGo);  // right wheel turns
+    //ServoLeft.write(leftGo);    // left wheel turns
+    //ServoRight.write(rightGo);  // right wheel turns
+    ServoLeft.write(stopGo);
+    ServoRight.write(stopGo);
   } 
   else if (RSensorVal < light && LSensorVal > light) {  // sees line on right side, is making a right turn
-    LeftServo.write(leftTurn);      // left wheel turns
-    RightServo.write(rightReverse); // right wheel reverses
+    ServoLeft.write(leftTurn);      // left wheel turns
+    ServoRight.write(rightReverse); // right wheel reverses
   } 
   else if (RSensorVal > light && LSensorVal < light) {  // sees line on left side, is making a left turn
-    LeftServo.write(leftReverse);  // left wheel reverses
-    RightServo.write(rightTurn);   // right wheel turns
+    ServoLeft.write(leftReverse);  // left wheel reverses
+    ServoRight.write(rightTurn);   // right wheel turns
   } 
   else {  // both are seeing line, goes straight until light is seen
-    LeftServo.write(leftTurn);    // left wheel turns
-    RightServo.write(rightTurn);  // right wheel turns
+    ServoLeft.write(leftTurn);    // left wheel turns
+    ServoRight.write(rightTurn);  // right wheel turns
   }
   
   // for debugging
